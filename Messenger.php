@@ -14,7 +14,8 @@ $messageText = $input['entry'][0]['messaging'][0]['message']['text'];
 $isteamvalid = ""; // this variable will indicate if a team exist. I found out that when you request the status of a team with the TBA nightbot http request, it tells you if the team exist or not.
 
 // These lines are getting the name of the user
-$userinfo = file_get_contents("https://graph.facebook.com/v2.6/{$senderId}?fields=first_name&access_token={$accessToken}");
+$userinfojs = file_get_contents("https://graph.facebook.com/v2.6/{$senderId}?fields=first_name&access_token={$accessToken}");
+$userinfo = json_decode($userinfojs);
 $susername = $userinfo->{'first_name'};
 
 
