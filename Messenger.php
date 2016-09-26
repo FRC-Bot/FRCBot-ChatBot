@@ -96,10 +96,33 @@ if(strpos(strtolower($messageText), 'location') !== false) { //get the location 
     $parsed_json = json_decode($json_string);
 	$answer = "Team {$nbteam} is located in " . $parsed_json->{'location'};
 	
-	$response = [
-    'recipient' => [ 'id' => $senderId ],
-    'message' => [ 'text' => $answer ]
-];
+		$response = array (
+  'recipient' => 
+  array (
+    'id' => $senderId,
+  ),
+  'message' => 
+  array (
+    'attachment' => 
+    array (
+      'type' => 'template',
+      'payload' => 
+      array (
+        'template_type' => 'button',
+        'text' => $answer,
+        'buttons' => 
+        array (
+          0 => 
+          array (
+            'type' => 'web_url',
+            'url' => "https://www.google.com/maps/place/" . $parsed_json->{'location'},
+            'title' => "View on Google Maps",
+          ),
+        ),
+      ),
+    ),
+  ),
+);
 $isteamvalid = file_get_contents("http://www.thebluealliance.com/_/nightbot/status/{$nbteam}"); // this line check if the team exist with a http request to the status nightbot command
 }
 if(strpos(strtolower($messageText), 'nickname') !== false) { //get the nickname of a team
