@@ -12,6 +12,12 @@ $input = json_decode(file_get_contents('php://input'), true);
 $senderId = $input['entry'][0]['messaging'][0]['sender']['id'];
 $messageText = $input['entry'][0]['messaging'][0]['message']['text'];
 $isteamvalid = ""; // this variable will indicate if a team exist. I found out that when you request the status of a team with the TBA nightbot http request, it tells you if the team exist or not.
+
+// These lines are getting the name of the user
+$userinfo = file_get_contents("https://graph.facebook.com/v2.6/{$senderId}?fields=first_name&access_token={$accessToken}");
+$susername = $userinfo->{'first_name'};
+
+
 $answer = "I don't understand. Type 'help' for a list of commands!";
 	$response = [
     'recipient' => [ 'id' => $senderId ],
@@ -19,7 +25,7 @@ $answer = "I don't understand. Type 'help' for a list of commands!";
 ];
 	
 if ((strpos(strtolower($messageText), 'hi') !== false) || (strpos(strtolower($messageText), 'hello') !== false)) {
-$answer = "Hello! I'm the Facebook ChatBot for FRC__Bot! Type 'help' for a list of commands!";
+$answer = "Hello {$susername}! I'm the Facebook ChatBot for FRC__Bot! Type 'help' for a list of commands!";
 	
 	
 	$response = [
@@ -207,7 +213,7 @@ $answer = "\xf0\x9f\x91\x8d"; // Thumbs Up Emoji
 	
 }
 if (strpos(strtolower($messageText), 'bye') !== false) {
-$answer = "Goodbye! Ttyl :)";
+$answer = "Goodbye {$susername}! Ttyl :)";
 	
 	
 	$response = [
