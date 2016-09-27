@@ -48,7 +48,7 @@ $response = array (
       'type' => 'image',
       'payload' => 
       array (
-        'url' => 'https://douce-vie.ca/technonerdz/frcbot/frcbothelp.png',
+        'url' => 'https://frc-bot.github.io/FRCBot-images/messenger/frcbothelp.png',
       ),
     ),
   ),
