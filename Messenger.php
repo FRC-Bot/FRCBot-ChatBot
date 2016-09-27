@@ -191,7 +191,7 @@ if ((strpos(strtolower($messageText), 'team') !== false) && (strpos(strtolower($
       ),
     ),
   ),
-);;
+);
 $isteamvalid = file_get_contents("http://www.thebluealliance.com/_/nightbot/status/{$nbteam}"); // this line check if the team exist with a http request to the status nightbot command
 	
 }
