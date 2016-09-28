@@ -147,7 +147,7 @@ if(strpos(strtolower($messageText), 'nickname') !== false) { //get the nickname 
 ];
 $isteamvalid = file_get_contents("http://www.thebluealliance.com/_/nightbot/status/{$nbteam}"); // this line check if the team exist with a http request to the status nightbot command
 }
-if(strpos(strtolower($messageText), 'sponsors') !== false) { //get the sponsors of a team
+if((strpos(strtolower($messageText), 'sponsors') !== false) || (strpos(strtolower($messageText), 'partner') !== false)) { //get the sponsors of a team
 	
 	$nbteam = filter_var($messageText, FILTER_SANITIZE_NUMBER_INT);
 	
@@ -223,6 +223,29 @@ $answer = "Goodbye {$susername}! Ttyl :)";
 ];
 	
 }
+
+if (strpos(strtolower($messageText), 'thank you') !== false) {
+$answer = "You're welcome {$susername}!";
+	
+	
+	$response = [
+    'recipient' => [ 'id' => $senderId ],
+    'message' => [ 'text' => $answer ]
+];
+	
+}
+
+if (strpos(strtolower($messageText), 'why') !== false) {
+$answer = "I don't know!";
+	
+	
+	$response = [
+    'recipient' => [ 'id' => $senderId ],
+    'message' => [ 'text' => $answer ]
+];
+	
+}
+
 //this check if the team exist and write an error if it does not exist
 if (strpos(strtolower($isteamvalid), 'does not exist') !== false) {
 	
