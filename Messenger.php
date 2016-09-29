@@ -25,7 +25,7 @@ $answer = "I don't understand. Type 'help' for a list of commands!";
     'message' => [ 'text' => $answer ]
 ];
 	
-if ((strpos(strtolower($messageText), 'hi') !== false) || (strpos(strtolower($messageText), 'hello') !== false)) {
+if ((strpos(strtolower($messageText), 'hi') !== false) || (strpos(strtolower($messageText), 'hello') !== false) || (strpos(strtolower($messageText), 'hey') !== false)) {
 $answer = "Hello {$susername}! I'm the Facebook ChatBot for FRC__Bot! Type 'help' for a list of commands!";
 	
 	
