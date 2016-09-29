@@ -54,7 +54,7 @@ $answer = "Goodbye {$susername}! Ttyl :)";
 	
 }
 
-if (strpos(strtolower($messageText), 'thank you') !== false) {
+if (strpos(strtolower($messageText), 'thank') !== false) {
 $answer = "You're welcome {$susername}!";
 	
 	
