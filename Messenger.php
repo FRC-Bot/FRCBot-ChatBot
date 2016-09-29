@@ -246,6 +246,17 @@ $answer = "I don't know!";
 	
 }
 
+if (strpos(strtolower($messageText), 'teaser') !== false) {
+$answer = "You can take a look at the 2017 FIRST STEAMWORKS Teaser here: https://www.youtube.com/watch?v=37GBEBLfhWA";
+	
+	
+	$response = [
+    'recipient' => [ 'id' => $senderId ],
+    'message' => [ 'text' => $answer ]
+];
+	
+}
+
 //this check if the team exist and write an error if it does not exist
 if (strpos(strtolower($isteamvalid), 'does not exist') !== false) {
 	
