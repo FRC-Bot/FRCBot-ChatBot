@@ -24,6 +24,113 @@ $answer = "I don't understand. Type 'help' for a list of commands!";
     'recipient' => [ 'id' => $senderId ],
     'message' => [ 'text' => $answer ]
 ];
+
+//Random crap
+if(strpos(strtolower($messageText), 'shut up') !== false) {
+	$answer = "...";
+	$response = [
+    'recipient' => [ 'id' => $senderId ],
+    'sender_action' => 'mark_seen'
+];
+}
+if ((strpos(strtolower($messageText), 'ok') !== false) || (strpos(strtolower($messageText), "\xf0\x9f\x91\x8d") !== false)) {
+$answer = "\xf0\x9f\x91\x8d"; // Thumbs Up Emoji
+	
+	
+	$response = [
+    'recipient' => [ 'id' => $senderId ],
+    'message' => [ 'text' => $answer ]
+];
+	
+}
+if (strpos(strtolower($messageText), 'bye') !== false) {
+$answer = "Goodbye {$susername}! Ttyl :)";
+	
+	
+	$response = [
+    'recipient' => [ 'id' => $senderId ],
+    'message' => [ 'text' => $answer ]
+];
+	
+}
+
+if (strpos(strtolower($messageText), 'thank you') !== false) {
+$answer = "You're welcome {$susername}!";
+	
+	
+	$response = [
+    'recipient' => [ 'id' => $senderId ],
+    'message' => [ 'text' => $answer ]
+];
+	
+}
+
+if ((strpos(strtolower($messageText), 'why') !== false) || (strpos(strtolower($messageText), 'what') !== false)) {
+$answer = "I don't know!";
+	
+	
+	$response = [
+    'recipient' => [ 'id' => $senderId ],
+    'message' => [ 'text' => $answer ]
+];
+	
+}
+
+if ((strpos(strtolower($messageText), 'what up') !== false) || (strpos(strtolower($messageText), "what's up") !== false)) {
+$answer = "Nothing much!";
+	
+	
+	$response = [
+    'recipient' => [ 'id' => $senderId ],
+    'message' => [ 'text' => $answer ]
+];
+	
+}
+
+if ((strpos(strtolower($messageText), 'what') !== false) && (strpos(strtolower($messageText), 'your') !== false) && (strpos(strtolower($messageText), "favorite") !== false)) {
+	$answer = "I don't know! How about you?";
+	
+	$response = [
+    	'recipient' => [ 'id' => $senderId ],
+  	  'message' => [ 'text' => $answer ]
+	];
+	
+	if (strpos(strtolower($messageText), 'team') !== false) {
+		$answer = "";
+	
+	
+		$response = [
+    		'recipient' => [ 'id' => $senderId ],
+  	 	 'message' => [ 'text' => $answer ]
+		];
+	}
+	
+	if (strpos(strtolower($messageText), 'website') !== false) {
+		$answer = "My favorite websites are frcbot.com and thebluealliance.com !";
+	
+	
+		$response = [
+    		'recipient' => [ 'id' => $senderId ],
+  	 	 'message' => [ 'text' => $answer ]
+		];
+	}
+	
+}
+
+if (strpos(strtolower($messageText), 'teaser') !== false) {
+$answer = "You can take a look at the 2017 FIRST STEAMWORKS Teaser here: https://www.youtube.com/watch?v=37GBEBLfhWA";
+	
+	
+	$response = [
+    'recipient' => [ 'id' => $senderId ],
+    'message' => [ 'text' => $answer ]
+];
+	
+}
+
+
+// Bot commands
+
 	
 if ((strpos(strtolower($messageText), 'hi') !== false) || (strpos(strtolower($messageText), 'hello') !== false) || (strpos(strtolower($messageText), 'hey') !== false)) {
 $answer = "Hello {$susername}! I'm the Facebook ChatBot for FRC__Bot! Type 'help' for a list of commands!";
@@ -55,6 +162,18 @@ $response = array (
 );
 	
 }
+
+if ((strpos(strtolower($messageText), 'social') !== false) || (strpos(strtolower($messageText), 'facebook') !== false) || (strpos(strtolower($messageText), 'twitter') !== false) || (strpos(strtolower($messageText), 'youtube') !== false)  || (strpos(strtolower($messageText), 'instagram') !== false)) {
+$answer = "Right now, I can't give you the social medias of teams but my developpers are working on that!";
+	
+	
+	$response = [
+    'recipient' => [ 'id' => $senderId ],
+    'message' => [ 'text' => $answer ]
+];
+	
+}
+
 if(strpos(strtolower($messageText), 'nextmatch') !== false) {
 	
 	$nmteam = filter_var($messageText, FILTER_SANITIZE_NUMBER_INT);
@@ -193,67 +312,6 @@ if ((strpos(strtolower($messageText), 'team') !== false) && (strpos(strtolower($
   ),
 );
 $isteamvalid = file_get_contents("http://www.thebluealliance.com/_/nightbot/status/{$nbteam}"); // this line check if the team exist with a http request to the status nightbot command
-	
-}
-//Random crap
-if(strpos(strtolower($messageText), 'shut up') !== false) {
-	
-	$response = [
-    'recipient' => [ 'id' => $senderId ],
-    'sender_action' => 'mark_seen'
-];
-}
-if ((strpos(strtolower($messageText), 'ok') !== false) || (strpos(strtolower($messageText), "\xf0\x9f\x91\x8d") !== false)) {
-$answer = "\xf0\x9f\x91\x8d"; // Thumbs Up Emoji
-	
-	
-	$response = [
-    'recipient' => [ 'id' => $senderId ],
-    'message' => [ 'text' => $answer ]
-];
-	
-}
-if (strpos(strtolower($messageText), 'bye') !== false) {
-$answer = "Goodbye {$susername}! Ttyl :)";
-	
-	
-	$response = [
-    'recipient' => [ 'id' => $senderId ],
-    'message' => [ 'text' => $answer ]
-];
-	
-}
-
-if (strpos(strtolower($messageText), 'thank you') !== false) {
-$answer = "You're welcome {$susername}!";
-	
-	
-	$response = [
-    'recipient' => [ 'id' => $senderId ],
-    'message' => [ 'text' => $answer ]
-];
-	
-}
-
-if (strpos(strtolower($messageText), 'why') !== false) {
-$answer = "I don't know!";
-	
-	
-	$response = [
-    'recipient' => [ 'id' => $senderId ],
-    'message' => [ 'text' => $answer ]
-];
-	
-}
-
-if (strpos(strtolower($messageText), 'teaser') !== false) {
-$answer = "You can take a look at the 2017 FIRST STEAMWORKS Teaser here: https://www.youtube.com/watch?v=37GBEBLfhWA";
-	
-	
-	$response = [
-    'recipient' => [ 'id' => $senderId ],
-    'message' => [ 'text' => $answer ]
-];
 	
 }
 
