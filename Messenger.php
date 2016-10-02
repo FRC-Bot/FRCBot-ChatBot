@@ -175,7 +175,7 @@ $response = array (
 }
 
 if ((strpos(strtolower($messageText), 'social') !== false) || (strpos(strtolower($messageText), 'facebook') !== false) || (strpos(strtolower($messageText), 'twitter') !== false) || (strpos(strtolower($messageText), 'youtube') !== false)  || (strpos(strtolower($messageText), 'instagram') !== false)) {
-$answer = "Right now, I can't give you the social medias of teams but my developpers are working on that!";
+$answer = "Right now, I can't give you the social medias of teams but my developers are working on that!";
 	
 	
 	$response = [
