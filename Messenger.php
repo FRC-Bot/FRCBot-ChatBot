@@ -66,7 +66,7 @@ $answer = "You're welcome {$susername}!";
 }
 
 if ((strpos(strtolower($messageText), 'why') !== false) || (strpos(strtolower($messageText), 'what') !== false)) {
-$answer = "I don't know!";
+$answer = "I don't know! Type 'help' for a list of commands!";
 	
 	
 	$response = [
