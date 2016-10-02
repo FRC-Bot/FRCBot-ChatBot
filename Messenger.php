@@ -128,6 +128,17 @@ $answer = "You can take a look at the 2017 FIRST STEAMWORKS Teaser here: https:/
 	
 }
 
+if (strpos(strtolower($messageText), 'date') !== false) {
+$answer = "You can take a look at the FIRST calendar here: http://www.firstinspires.org/robotics/frc/calendar";
+	
+	
+	$response = [
+    'recipient' => [ 'id' => $senderId ],
+    'message' => [ 'text' => $answer ]
+];
+	
+}
+
 
 // Bot commands
 
