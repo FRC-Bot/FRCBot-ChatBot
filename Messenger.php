@@ -35,175 +35,175 @@ if(strpos(strtolower($messageText), 'shut up') !== false) {
 }
 if ((strpos(strtolower($messageText), 'ok') !== false) || (strpos(strtolower($messageText), "\xf0\x9f\x91\x8d") !== false)) {
 $answer = "\xf0\x9f\x91\x8d"; // Thumbs Up Emoji
-	
-	
+
+
 	$response = [
     'recipient' => [ 'id' => $senderId ],
     'message' => [ 'text' => $answer ]
 ];
-	
+
 }
 if (strpos(strtolower($messageText), 'bye') !== false) {
 $answer = "Goodbye {$susername}! Ttyl :)";
-	
-	
+
+
 	$response = [
     'recipient' => [ 'id' => $senderId ],
     'message' => [ 'text' => $answer ]
 ];
-	
+
 }
 
 if (strpos(strtolower($messageText), 'thank') !== false) {
 $answer = "You're welcome {$susername}!";
-	
-	
+
+
 	$response = [
     'recipient' => [ 'id' => $senderId ],
     'message' => [ 'text' => $answer ]
 ];
-	
+
 }
 
 if ((strpos(strtolower($messageText), 'why') !== false) || (strpos(strtolower($messageText), 'what') !== false)) {
 $answer = "I don't know!";
-	
-	
+
+
 	$response = [
     'recipient' => [ 'id' => $senderId ],
     'message' => [ 'text' => $answer ]
 ];
-	
+
 }
 
 if ((strpos(strtolower($messageText), 'what up') !== false) || (strpos(strtolower($messageText), "what's up") !== false)) {
 $answer = "Nothing much!";
-	
-	
+
+
 	$response = [
     'recipient' => [ 'id' => $senderId ],
     'message' => [ 'text' => $answer ]
 ];
-	
+
 }
 
 if ((strpos(strtolower($messageText), 'what') !== false) && (strpos(strtolower($messageText), 'your') !== false) && (strpos(strtolower($messageText), "favorite") !== false)) {
 	$answer = "I don't know! How about you?";
-	
+
 	$response = [
     	'recipient' => [ 'id' => $senderId ],
   	  'message' => [ 'text' => $answer ]
 	];
-	
+
 	if (strpos(strtolower($messageText), 'team') !== false) {
 		$answer = "";
-	
-	
+
+
 		$response = [
     		'recipient' => [ 'id' => $senderId ],
   	 	 'message' => [ 'text' => $answer ]
 		];
 	}
-	
+
 	if (strpos(strtolower($messageText), 'website') !== false) {
 		$answer = "My favorite websites are frcbot.com and thebluealliance.com !";
-	
-	
+
+
 		$response = [
     		'recipient' => [ 'id' => $senderId ],
   	 	 'message' => [ 'text' => $answer ]
 		];
 	}
-	
+
 }
 
 if (strpos(strtolower($messageText), 'teaser') !== false) {
 $answer = "You can take a look at the 2017 FIRST STEAMWORKS Teaser here: https://www.youtube.com/watch?v=37GBEBLfhWA";
-	
-	
+
+
 	$response = [
     'recipient' => [ 'id' => $senderId ],
     'message' => [ 'text' => $answer ]
 ];
-	
+
 }
 
 if (strpos(strtolower($messageText), 'date') !== false) {
 $answer = "You can take a look at the FIRST calendar here: http://www.firstinspires.org/robotics/frc/calendar";
-	
-	
+
+
 	$response = [
     'recipient' => [ 'id' => $senderId ],
     'message' => [ 'text' => $answer ]
 ];
-	
+
 }
 
 
 // Bot commands
 
-	
+
 if ((strpos(strtolower($messageText), 'hi') !== false) || (strpos(strtolower($messageText), 'hello') !== false) || (strpos(strtolower($messageText), 'hey') !== false)) {
 $answer = "Hello {$susername}! I'm the Facebook ChatBot for FRC__Bot! Type 'help' for a list of commands!";
-	
-	
+
+
 	$response = [
     'recipient' => [ 'id' => $senderId ],
     'message' => [ 'text' => $answer ]
 ];
-	
+
 }
 if (strpos(strtolower($messageText), 'help') !== false) {
 $response = array (
-  'recipient' => 
+  'recipient' =>
   array (
     'id' => $senderId,
   ),
-  'message' => 
+  'message' =>
   array (
-    'attachment' => 
+    'attachment' =>
     array (
       'type' => 'image',
-      'payload' => 
+      'payload' =>
       array (
         'url' => 'https://frc-bot.github.io/FRCBot-images/messenger/frcbothelp.png',
       ),
     ),
   ),
 );
-	
+
 }
 
 if ((strpos(strtolower($messageText), 'social') !== false) || (strpos(strtolower($messageText), 'facebook') !== false) || (strpos(strtolower($messageText), 'twitter') !== false) || (strpos(strtolower($messageText), 'youtube') !== false)  || (strpos(strtolower($messageText), 'instagram') !== false)) {
-$answer = "Right now, I can't give you the social medias of teams but my developpers are working on that!";
-	
-	
+$answer = "Right now, I can't give you the social medias of teams but my developers are working on that!";
+
+
 	$response = [
     'recipient' => [ 'id' => $senderId ],
     'message' => [ 'text' => $answer ]
 ];
-	
+
 }
 
 if(strpos(strtolower($messageText), 'nextmatch') !== false) {
-	
+
 	$nmteam = filter_var($messageText, FILTER_SANITIZE_NUMBER_INT);
-	
+
 	$answer = file_get_contents("http://www.thebluealliance.com/_/nightbot/nextmatch/{$nmteam}");
-	
-	
+
+
 	$response = [
     'recipient' => [ 'id' => $senderId ],
     'message' => [ 'text' => $answer ]
 ];
 }
 if(strpos(strtolower($messageText), 'status') !== false) {
-	
+
 	$stteam = filter_var($messageText, FILTER_SANITIZE_NUMBER_INT);
-	
+
 	$answer = file_get_contents("http://www.thebluealliance.com/_/nightbot/status/{$stteam}");
-	
-	
+
+
 	$response = [
     'recipient' => [ 'id' => $senderId ],
     'message' => [ 'text' => $answer ]
@@ -211,13 +211,13 @@ if(strpos(strtolower($messageText), 'status') !== false) {
 }
 // This part is based on TheBlueAlliance API https://www.thebluealliance.com/apidocs
 if(strpos(strtolower($messageText), 'website') !== false) { //get the website of a team
-	
+
 	$nbteam = filter_var($messageText, FILTER_SANITIZE_NUMBER_INT);
-	
+
 	$json_string = file_get_contents("http://www.thebluealliance.com/api/v2/team/frc{$nbteam}?X-TBA-App-Id=frcbot:messengerchatbot:1");
     $parsed_json = json_decode($json_string);
 	$answer = "The website of team {$nbteam} is " . $parsed_json->{'website'};
-	
+
 	$response = [
     'recipient' => [ 'id' => $senderId ],
     'message' => [ 'text' => $answer ]
@@ -225,31 +225,31 @@ if(strpos(strtolower($messageText), 'website') !== false) { //get the website of
 $isteamvalid = file_get_contents("http://www.thebluealliance.com/_/nightbot/status/{$nbteam}"); // this line check if the team exist with a http request to the status nightbot command
 }
 if(strpos(strtolower($messageText), 'location') !== false) { //get the location of a team
-	
+
 	$nbteam = filter_var($messageText, FILTER_SANITIZE_NUMBER_INT);
-	
-	
+
+
 	$json_string = file_get_contents("http://www.thebluealliance.com/api/v2/team/frc{$nbteam}?X-TBA-App-Id=frcbot:messengerchatbot:1");
     $parsed_json = json_decode($json_string);
 	$answer = "Team {$nbteam} is located in " . $parsed_json->{'location'};
-	
+
 		$response = array (
-  'recipient' => 
+  'recipient' =>
   array (
     'id' => $senderId,
   ),
-  'message' => 
+  'message' =>
   array (
-    'attachment' => 
+    'attachment' =>
     array (
       'type' => 'template',
-      'payload' => 
+      'payload' =>
       array (
         'template_type' => 'button',
         'text' => $answer,
-        'buttons' => 
+        'buttons' =>
         array (
-          0 => 
+          0 =>
           array (
             'type' => 'web_url',
             'url' => "https://www.google.com/maps/place/" . $parsed_json->{'location'},
@@ -263,14 +263,14 @@ if(strpos(strtolower($messageText), 'location') !== false) { //get the location 
 $isteamvalid = file_get_contents("http://www.thebluealliance.com/_/nightbot/status/{$nbteam}"); // this line check if the team exist with a http request to the status nightbot command
 }
 if(strpos(strtolower($messageText), 'nickname') !== false) { //get the nickname of a team
-	
+
 	$nbteam = filter_var($messageText, FILTER_SANITIZE_NUMBER_INT);
-	
-	
+
+
 	$json_string = file_get_contents("http://www.thebluealliance.com/api/v2/team/frc{$nbteam}?X-TBA-App-Id=frcbot:messengerchatbot:1");
     $parsed_json = json_decode($json_string);
 	$answer = "Team {$nbteam}'s nickname is " . $parsed_json->{'nickname'};
-	
+
 	$response = [
     'recipient' => [ 'id' => $senderId ],
     'message' => [ 'text' => $answer ]
@@ -278,14 +278,14 @@ if(strpos(strtolower($messageText), 'nickname') !== false) { //get the nickname 
 $isteamvalid = file_get_contents("http://www.thebluealliance.com/_/nightbot/status/{$nbteam}"); // this line check if the team exist with a http request to the status nightbot command
 }
 if((strpos(strtolower($messageText), 'sponsors') !== false) || (strpos(strtolower($messageText), 'partner') !== false)) { //get the sponsors of a team
-	
+
 	$nbteam = filter_var($messageText, FILTER_SANITIZE_NUMBER_INT);
-	
-	
+
+
 	$json_string = file_get_contents("http://www.thebluealliance.com/api/v2/team/frc{$nbteam}?X-TBA-App-Id=frcbot:messengerchatbot:1");
     $parsed_json = json_decode($json_string);
 	$answer = "Team {$nbteam}'s sponsors are " . $parsed_json->{'name'};
-	
+
 	$response = [
     'recipient' => [ 'id' => $senderId ],
     'message' => [ 'text' => $answer ]
@@ -296,22 +296,22 @@ $isteamvalid = file_get_contents("http://www.thebluealliance.com/_/nightbot/stat
 if ((strpos(strtolower($messageText), 'team') !== false) && (strpos(strtolower($messageText), 'page') !== false)) {
 	$nbteam = filter_var($messageText, FILTER_SANITIZE_NUMBER_INT);
 	$response = array (
-  'recipient' => 
+  'recipient' =>
   array (
     'id' => $senderId,
   ),
-  'message' => 
+  'message' =>
   array (
-    'attachment' => 
+    'attachment' =>
     array (
       'type' => 'template',
-      'payload' => 
+      'payload' =>
       array (
         'template_type' => 'button',
         'text' => "Click to visit the team page of {$nbteam} on TBA",
-        'buttons' => 
+        'buttons' =>
         array (
-          0 => 
+          0 =>
           array (
             'type' => 'web_url',
             'url' => "http://www.thebluealliance.com/team/{$nbteam}",
@@ -323,18 +323,18 @@ if ((strpos(strtolower($messageText), 'team') !== false) && (strpos(strtolower($
   ),
 );
 $isteamvalid = file_get_contents("http://www.thebluealliance.com/_/nightbot/status/{$nbteam}"); // this line check if the team exist with a http request to the status nightbot command
-	
+
 }
 
 //this check if the team exist and write an error if it does not exist
 if (strpos(strtolower($isteamvalid), 'does not exist') !== false) {
-	
-	
+
+
 	$response = [
     'recipient' => [ 'id' => $senderId ],
     'message' => [ 'text' => $isteamvalid ]
 ];
-	
+
 }
 $ch = curl_init('https://graph.facebook.com/v2.6/me/messages?access_token='.$accessToken);
 curl_setopt($ch, CURLOPT_POST, 1);
