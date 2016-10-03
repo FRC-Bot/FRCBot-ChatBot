@@ -49,7 +49,7 @@ $answer = "Water Game"; // Thumbs Up Emoji
 	
 	$wgimages = ['http://frcbot.com/chatbot/data/wg/1.jpg', 'http://frcbot.com/chatbot/data/wg/2.jpg', 'http://frcbot.com/chatbot/data/wg/3.jpg'];
 
-    $wgurl = $wgimages[mt_rand(0, count($wgimages) - 1)];
+    $wgurl = $wgimages[mt_rand(0, 3)];
 	
 	$response = array (
   'recipient' => 
