@@ -43,6 +43,34 @@ $answer = "\xf0\x9f\x91\x8d"; // Thumbs Up Emoji
 ];
 	
 }
+
+if ((strpos(strtolower($messageText), 'water') !== false) && (strpos(strtolower($messageText), "game") !== false)) {
+$answer = "Water Game"; // Thumbs Up Emoji
+	
+	$wgimages = ['http://frcbot.com/chatbot/data/wg/1.jpg', 'http://frcbot.com/chatbot/data/wg/2.jpg', 'http://frcbot.com/chatbot/data/wg/3.jpg'];
+
+    $wgurl = $wgimages[mt_rand(0, count($wgimages) - 1)];
+	
+	$response = array (
+  'recipient' => 
+  array (
+    'id' => $senderId,
+  ),
+  'message' => 
+  array (
+    'attachment' => 
+    array (
+      'type' => 'image',
+      'payload' => 
+      array (
+        'url' => $wgurl,
+      ),
+    ),
+  ),
+);
+	
+}
+
 if (strpos(strtolower($messageText), 'bye') !== false) {
 $answer = "Goodbye {$susername}! Ttyl :)";
 	
