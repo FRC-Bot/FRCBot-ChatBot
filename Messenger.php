@@ -338,7 +338,7 @@ $isteamvalid = file_get_contents("http://www.thebluealliance.com/_/nightbot/stat
 	
 }
 
-if((strpos(strtolower($messageText), 'mediatest') !== false) || (strpos(strtolower($messageText), 'picturetest') !== false)) { //get the pictures of a team
+if((strpos(strtolower($messageText), 'media') !== false) || (strpos(strtolower($messageText), 'picture') !== false)) { //get the pictures of a team
 	
 	$justnumbers = filter_var($messageText, FILTER_SANITIZE_NUMBER_INT); // remove the text from the command and only keep numbers
 	
