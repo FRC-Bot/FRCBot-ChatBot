@@ -12,19 +12,15 @@ $input = json_decode(file_get_contents('php://input'), true);
 $senderId = $input['entry'][0]['messaging'][0]['sender']['id'];
 $messageText = $input['entry'][0]['messaging'][0]['message']['text'];
 $isteamvalid = ""; // this variable will indicate if a team exist. I found out that when you request the status of a team with the TBA nightbot http request, it tells you if the team exist or not.
-
 // These lines are getting the name of the user
 $userinfojs = file_get_contents("https://graph.facebook.com/v2.6/{$senderId}?fields=first_name&access_token={$accessToken}");
 $userinfo = json_decode($userinfojs);
 $susername = $userinfo->{'first_name'};
-
-
 $answer = "I don't understand. Type 'help' for a list of commands!";
 	$response = [
     'recipient' => [ 'id' => $senderId ],
     'message' => [ 'text' => $answer ]
 ];
-
 //Random crap
 if(strpos(strtolower($messageText), 'shut up') !== false) {
 	$answer = "...";
@@ -45,10 +41,9 @@ $answer = "\xf0\x9f\x91\x8d"; // Thumbs Up Emoji
 }
 
 if ((strpos(strtolower($messageText), 'water') !== false) && (strpos(strtolower($messageText), "game") !== false)) {
-$answer = "Water Game";
+$answer = "Water Game"; // Thumbs Up Emoji
 	
 	$wgimages = ['http://frcbot.com/chatbot/data/wg/1.jpg', 'http://frcbot.com/chatbot/data/wg/2.jpg', 'http://frcbot.com/chatbot/data/wg/3.jpg'];
-
     $wgurl = $wgimages[mt_rand(0, 2)];
 	
 	$response = array (
@@ -81,7 +76,6 @@ $answer = "Goodbye {$susername}! Ttyl :)";
 ];
 	
 }
-
 if (strpos(strtolower($messageText), 'thank') !== false) {
 $answer = "You're welcome {$susername}!";
 	
@@ -92,7 +86,6 @@ $answer = "You're welcome {$susername}!";
 ];
 	
 }
-
 if ((strpos(strtolower($messageText), 'why') !== false) || (strpos(strtolower($messageText), 'what') !== false)) {
 $answer = "I don't know! Type 'help' for a list of commands!";
 	
@@ -103,7 +96,6 @@ $answer = "I don't know! Type 'help' for a list of commands!";
 ];
 	
 }
-
 if ((strpos(strtolower($messageText), 'what up') !== false) || (strpos(strtolower($messageText), "what's up") !== false)) {
 $answer = "Nothing much!";
 	
@@ -114,7 +106,6 @@ $answer = "Nothing much!";
 ];
 	
 }
-
 if ((strpos(strtolower($messageText), 'what') !== false) && (strpos(strtolower($messageText), 'your') !== false) && (strpos(strtolower($messageText), "favorite") !== false)) {
 	$answer = "I don't know! How about you?";
 	
@@ -144,7 +135,6 @@ if ((strpos(strtolower($messageText), 'what') !== false) && (strpos(strtolower($
 	}
 	
 }
-
 if (strpos(strtolower($messageText), 'teaser') !== false) {
 $answer = "You can take a look at the 2017 FIRST STEAMWORKS Teaser here: https://www.youtube.com/watch?v=37GBEBLfhWA";
 	
@@ -155,7 +145,6 @@ $answer = "You can take a look at the 2017 FIRST STEAMWORKS Teaser here: https:/
 ];
 	
 }
-
 if (strpos(strtolower($messageText), 'date') !== false) {
 $answer = "You can take a look at the FIRST calendar here: http://www.firstinspires.org/robotics/frc/calendar";
 	
@@ -166,10 +155,7 @@ $answer = "You can take a look at the FIRST calendar here: http://www.firstinspi
 ];
 	
 }
-
-
 // Bot commands
-
 	
 if ((strpos(strtolower($messageText), 'hi') !== false) || (strpos(strtolower($messageText), 'hello') !== false) || (strpos(strtolower($messageText), 'hey') !== false)) {
 $answer = "Hello {$susername}! I'm the Facebook ChatBot for FRC__Bot! Type 'help' for a list of commands!";
@@ -201,7 +187,6 @@ $response = array (
 );
 	
 }
-
 if ((strpos(strtolower($messageText), 'social') !== false) || (strpos(strtolower($messageText), 'facebook') !== false) || (strpos(strtolower($messageText), 'twitter') !== false) || (strpos(strtolower($messageText), 'youtube') !== false)  || (strpos(strtolower($messageText), 'instagram') !== false)) {
 $answer = "Right now, I can't give you the social medias of teams but my developers are working on that!";
 	
@@ -212,7 +197,6 @@ $answer = "Right now, I can't give you the social medias of teams but my develop
 ];
 	
 }
-
 if(strpos(strtolower($messageText), 'nextmatch') !== false) {
 	
 	$nmteam = filter_var($messageText, FILTER_SANITIZE_NUMBER_INT);
@@ -354,6 +338,64 @@ $isteamvalid = file_get_contents("http://www.thebluealliance.com/_/nightbot/stat
 	
 }
 
+if((strpos(strtolower($messageText), 'mediatest') !== false) || (strpos(strtolower($messageText), 'picturetest') !== false)) { //get the pictures of a team
+	
+	$justnumbers = filter_var($messageText, FILTER_SANITIZE_NUMBER_INT); // remove the text from the command and only keep numbers
+	
+	$mediayear = substr($justnumbers, 0, 4);
+	$nbteam = str_replace($mediayear, '', $justnumbers);
+	
+	$json_string = file_get_contents("http://www.thebluealliance.com/api/v2/team/frc{$nbteam}/{$mediayear}/media?X-TBA-App-Id=frcbot:messengerchatbot:1");
+    $parsed_json = json_decode($json_string);
+	$picturelink = "no link";
+	
+	if ((strpos(strtolower($json_string), 'cdphotothread') !== false) || (strpos(strtolower($json_string), 'imgur') !== false)) {
+		$nbmedia = count($parsed_json);
+		if (strpos(strtolower($json_string), 'cdphotothread') !== false) {
+			for($i=0;$i<$nbmedia;$i++) { 
+				if ($parsed_json[$i]->{'type'} == 'cdphotothread') {
+					$picturelink = $parsed_json[$i]->{'details'}->{'image_partial'};
+				}	
+			}
+			$answer = "http://www.chiefdelphi.com/media/img/{$picturelink}";
+		}else{
+			
+			for($i=0;$i<$nbmedia;$i++) { 
+				if ($parsed_json[$i]->{'type'} == 'imgur') {
+					$picturelink = $parsed_json[$i]->{'foreign_key'};
+				}	
+			}
+			$answer = "http://i.imgur.com/{$picturelink}m.jpg";
+			
+			}
+			
+$response = array (
+  'recipient' => 
+  array (
+    'id' => $senderId,
+  ),
+  'message' => 
+  array (
+    'attachment' => 
+    array (
+      'type' => 'image',
+      'payload' => 
+      array (
+        'url' => $answer,
+      ),
+    ),
+  ),
+);
+	
+	}else{
+	$answer = "team {$nbteam} didn't post any pictures in {$mediayear}";
+		$response = [
+    'recipient' => [ 'id' => $senderId ],
+    'message' => [ 'text' => $answer ]
+];
+	}
+$isteamvalid = file_get_contents("http://www.thebluealliance.com/_/nightbot/status/{$nbteam}"); // this line check if the team exist with a http request to the status nightbot command
+}
 //this check if the team exist and write an error if it does not exist
 if (strpos(strtolower($isteamvalid), 'does not exist') !== false) {
 	
