@@ -396,6 +396,22 @@ $response = array (
 	}
 $isteamvalid = file_get_contents("http://www.thebluealliance.com/_/nightbot/status/{$nbteam}"); // this line check if the team exist with a http request to the status nightbot command
 }
+
+if(strpos(strtolower($messageText), 'rookie') !== false) { //get the website of a team
+	
+	$nbteam = filter_var($messageText, FILTER_SANITIZE_NUMBER_INT);
+	
+	$json_string = file_get_contents("http://www.thebluealliance.com/api/v2/team/frc{$nbteam}?X-TBA-App-Id=frcbot:messengerchatbot:1");
+    $parsed_json = json_decode($json_string);
+	$answer = "Team {$nbteam} was created in " . $parsed_json->{'rookie_year'};
+	
+	$response = [
+    'recipient' => [ 'id' => $senderId ],
+    'message' => [ 'text' => $answer ]
+];
+$isteamvalid = file_get_contents("http://www.thebluealliance.com/_/nightbot/status/{$nbteam}"); // this line check if the team exist with a http request to the status nightbot command
+}
+
 //this check if the team exist and write an error if it does not exist
 if (strpos(strtolower($isteamvalid), 'does not exist') !== false) {
 	
