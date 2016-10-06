@@ -388,7 +388,7 @@ $response = array (
 );
 	
 	}else{
-	$answer = "team {$nbteam} didn't post any pictures in {$mediayear}";
+	$answer = "Team {$nbteam} didn't post any pictures in {$mediayear}";
 		$response = [
     'recipient' => [ 'id' => $senderId ],
     'message' => [ 'text' => $answer ]
