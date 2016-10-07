@@ -365,7 +365,7 @@ if((strpos(strtolower($messageText), 'media') !== false) || (strpos(strtolower($
 					$picturelink = $parsed_json[$i]->{'foreign_key'};
 				}	
 			}
-			$answer = "http://i.imgur.com/{$picturelink}m.jpg";
+			$answer = "http://i.imgur.com/{$picturelink}h.jpg";
 			
 			}
 			
