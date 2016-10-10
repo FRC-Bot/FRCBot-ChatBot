@@ -426,6 +426,31 @@ if(strpos(strtolower($messageText), 'motto') !== false) { //get the motto of a t
 ];
 $isteamvalid = file_get_contents("http://www.thebluealliance.com/_/nightbot/status/{$nbteam}"); // this line check if the team exist with a http request to the status nightbot command
 }
+// events
+
+if(strpos(strtolower($messageText), 'eventdate') !== false) { //get an event date
+	
+	$event = str_replace('eventdate', '', strtolower($messageText)); // remove eventdate to only keep the event key
+	$event = str_replace(' ', '', $event); // remove spaces
+	
+	$json_string = file_get_contents("http://www.thebluealliance.com/api/v2/event/{$event}?X-TBA-App-Id=frcbot:messengerchatbot:1");
+    $parsed_json = json_decode($json_string);
+
+	$evname = $parsed_json->{'name'};
+	$stdate = $parsed_json->{'start_date'};
+	$enddate = $parsed_json->{'end_date'};
+	
+	$answer = "{$evname} will Start on {$stdate} and will end on {$enddate}";
+	
+	if (strpos($answer, 'will Start on  and will end on') !== false){ //if there is an error
+		$answer = "Error: Invalid event key! Type 'event date EVENTKEY'";
+	}
+	
+	$response = [
+    'recipient' => [ 'id' => $senderId ],
+    'message' => [ 'text' => $answer ]
+];
+}
 
 //this check if the team exist and write an error if it does not exist
 if (strpos(strtolower($isteamvalid), 'does not exist') !== false) {
