@@ -443,7 +443,7 @@ if(strpos(strtolower($messageText), 'eventdate') !== false) { //get an event dat
 	$answer = "{$evname} will Start on {$stdate} and will end on {$enddate}";
 	
 	if (strpos($answer, 'will Start on  and will end on') !== false){ //if there is an error
-		$answer = "Error: Invalid event key! Type 'event date EVENTKEY'";
+		$answer = "Error: Invalid event key! Type 'eventdate EVENTKEY'";
 	}
 	
 	$response = [
