@@ -22,9 +22,6 @@
 	
 
   // Create Image From Existing File
-
-//to do: create the template
-
   $png_image = imagecreatefrompng ('https://frc-bot.github.io/FRCBot-images/messenger/MatchResultsTemplates/pre2016/template.png');
   
   $cor = imagecolorallocate($rImg, 0, 0, 0);
