@@ -40,6 +40,17 @@ $answer = "\xf0\x9f\x91\x8d"; // Thumbs Up Emoji
 	
 }
 
+if (strpos(strtolower($messageText), 'ping') !== false) {
+$answer = "Pong!";
+	
+	
+	$response = [
+    'recipient' => [ 'id' => $senderId ],
+    'message' => [ 'text' => $answer ]
+];
+	
+}
+
 if ((strpos(strtolower($messageText), 'water') !== false) && (strpos(strtolower($messageText), "game") !== false)) {
 $answer = "Water Game"; 
 	
