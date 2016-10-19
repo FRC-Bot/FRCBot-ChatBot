@@ -463,6 +463,46 @@ if(strpos(strtolower($messageText), 'eventdate') !== false) { //get an event dat
 ];
 }
 
+if(strpos(strtolower($messageText), 'ranking') !== false) { //get the ranking of an event
+	
+	$event = str_replace('rankings', '', strtolower($messageText)); // remove rankings to only keep the event key
+	$event = str_replace('ranking', '', strtolower($messageText)); // remove ranking to only keep the event key
+	$event = str_replace(' ', '', $event); // remove spaces
+	
+	$answer = "https://www.thebluealliance.com/event/{$event}#rankings";
+	
+	
+	$response = array (
+  'recipient' => 
+  array (
+    'id' => $senderId,
+  ),
+  'message' => 
+  array (
+    'attachment' => 
+    array (
+      'type' => 'template',
+      'payload' => 
+      array (
+        'template_type' => 'button',
+        'text' => "Click to see the ranking of {$event} on TBA",
+        'buttons' => 
+        array (
+          0 => 
+          array (
+            'type' => 'web_url',
+            'url' => $answer,
+            'title' => "{$event} on TBA",
+          ),
+        ),
+      ),
+    ),
+  ),
+);
+}
+
+// teams in events
+
 //this check if the team exist and write an error if it does not exist
 if (strpos(strtolower($isteamvalid), 'does not exist') !== false) {
 	
