@@ -445,6 +445,7 @@ if(strpos(strtolower($messageText), 'eventdate') !== false) { //get an event dat
 	$event = str_replace(' ', '', $event); // remove spaces
 	$evyear = filter_var($event, FILTER_SANITIZE_NUMBER_INT);
 	
+	$event = file_get_contents("/chatbot/scripts/eventbyname.php?eventname={$event}");
 	
 	$json_string = file_get_contents("http://www.thebluealliance.com/api/v2/event/{$event}?X-TBA-App-Id=frcbot:messengerchatbot:1");
     	$parsed_json = json_decode($json_string);
@@ -470,6 +471,9 @@ if(strpos(strtolower($messageText), 'ranking') !== false) { //get the ranking of
 	$event = str_replace('rankings', '', strtolower($messageText)); // remove rankings to only keep the event key
 	$event = str_replace('ranking', '', strtolower($messageText)); // remove ranking to only keep the event key
 	$event = str_replace(' ', '', $event); // remove spaces
+	$evyear = filter_var($event, FILTER_SANITIZE_NUMBER_INT);
+	
+	$event = file_get_contents("/chatbot/scripts/eventbyname.php?eventname={$event}");
 	
 	$json_string = file_get_contents("https://www.thebluealliance.com/api/v2/event/{$event}?X-TBA-App-Id=frcbot:messengerchatbot:1");
     	$parsed_json = json_decode($json_string);
