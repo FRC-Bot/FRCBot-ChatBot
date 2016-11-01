@@ -469,36 +469,48 @@ if(strpos(strtolower($messageText), 'ranking') !== false) { //get the ranking of
 	$event = str_replace('ranking', '', strtolower($messageText)); // remove ranking to only keep the event key
 	$event = str_replace(' ', '', $event); // remove spaces
 	
+	$json_string = file_get_contents("https://www.thebluealliance.com/api/v2/event/{$event}?X-TBA-App-Id=frcbot:messengerchatbot:1");
+    	$parsed_json = json_decode($json_string);
+	
+	$evname = $parsed_json->{'name'};
+	
 	$answer = "https://www.thebluealliance.com/event/{$event}#rankings";
 	
-	
+	if(strpos(strtolower($json_string), 'name') !== false) {
 	$response = array (
-  'recipient' => 
-  array (
-    'id' => $senderId,
-  ),
-  'message' => 
-  array (
-    'attachment' => 
-    array (
-      'type' => 'template',
-      'payload' => 
-      array (
-        'template_type' => 'button',
-        'text' => "Click to see the ranking of {$event} on TBA",
-        'buttons' => 
-        array (
-          0 => 
-          array (
-            'type' => 'web_url',
-            'url' => $answer,
-            'title' => "{$event} on TBA",
-          ),
-        ),
-      ),
-    ),
-  ),
-);
+ 	 'recipient' => 
+	  array (
+ 	   'id' => $senderId,
+	  ),
+	  'message' => 
+ 	 array (
+ 	   'attachment' => 
+ 	   array (
+ 	     'type' => 'template',
+	      'payload' => 
+ 	     array (
+  	      'template_type' => 'button',
+ 	       'text' => "Click to see the ranking of {$event} on TBA",
+	        'buttons' => 
+ 	       array (
+	          0 => 
+ 	         array (
+	            'type' => 'web_url',
+  	          'url' => $answer,
+  	          'title' => "{$event} on TBA",
+  	        ),
+  	      ),
+ 	     ),
+	    ),
+	  ),
+	);
+	}else{
+	$answer = "Error: Invalid event key!";
+		$response = [
+  		  'recipient' => [ 'id' => $senderId ],
+  		  'message' => [ 'text' => $answer ]
+		];
+	}
 }
 
 // teams in events
