@@ -156,16 +156,6 @@ $answer = "You can take a look at the 2017 FIRST STEAMWORKS Teaser here: https:/
 ];
 	
 }
-if (strpos(strtolower($messageText), 'date') !== false) {
-$answer = "You can take a look at the FIRST calendar here: http://www.firstinspires.org/robotics/frc/calendar";
-	
-	
-	$response = [
-    'recipient' => [ 'id' => $senderId ],
-    'message' => [ 'text' => $answer ]
-];
-	
-}
 // Bot commands
 	
 if ((strpos(strtolower($messageText), 'hi') !== false) || (strpos(strtolower($messageText), 'hello') !== false) || (strpos(strtolower($messageText), 'hey') !== false)) {
@@ -439,9 +429,9 @@ $isteamvalid = file_get_contents("http://www.thebluealliance.com/_/nightbot/stat
 }
 // events
 
-if(strpos(strtolower($messageText), 'eventdate') !== false) { //get an event date
+if(strpos(strtolower($messageText), 'date') !== false) { //get an event date
 	
-	$event = str_replace('eventdate', '', strtolower($messageText)); // remove eventdate to only keep the event key
+	$event = str_replace('date', '', strtolower($messageText)); // remove eventdate to only keep the event key
 	$event = str_replace(' ', '', $event); // remove spaces
 	$evyear = filter_var($event, FILTER_SANITIZE_NUMBER_INT);
 	$event = str_replace($evyear, '', $event);
