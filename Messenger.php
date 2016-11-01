@@ -490,7 +490,7 @@ if(strpos(strtolower($messageText), 'ranking') !== false) { //get the ranking of
 	      'payload' => 
  	     array (
   	      'template_type' => 'button',
- 	       'text' => "Click to see the ranking of {$event} on TBA",
+ 	       'text' => "Click to see the ranking of {$evname} on TBA",
 	        'buttons' => 
  	       array (
 	          0 => 
