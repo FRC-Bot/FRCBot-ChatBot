@@ -11,6 +11,7 @@
   if (strpos($evid, 'https://www.thebluealliance.com/event/') !== false) {
 	  
 	  $answer = str_replace('https://www.thebluealliance.com/event/', '', $evid);
+	  $answer = str_replace(filter_var($answer, FILTER_SANITIZE_NUMBER_INT), '', $answer); //remove year from event id
 	  
 	}
   
