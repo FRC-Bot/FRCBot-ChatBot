@@ -443,18 +443,22 @@ if(strpos(strtolower($messageText), 'eventdate') !== false) { //get an event dat
 	
 	$event = str_replace('eventdate', '', strtolower($messageText)); // remove eventdate to only keep the event key
 	$event = str_replace(' ', '', $event); // remove spaces
+	$evyear = filter_var($event, FILTER_SANITIZE_NUMBER_INT);
+	$event = str_replace($evyear, '', $event);
+	
+	$event = file_get_contents("https://frcbot.com/chatbot/scripts/eventbyname.php?eventname={$event}");
+	$event = "{$evyear}{$event}";
 	
 	$json_string = file_get_contents("http://www.thebluealliance.com/api/v2/event/{$event}?X-TBA-App-Id=frcbot:messengerchatbot:1");
-    $parsed_json = json_decode($json_string);
-
+    	$parsed_json = json_decode($json_string);
 	$evname = $parsed_json->{'name'};
 	$stdate = $parsed_json->{'start_date'};
 	$enddate = $parsed_json->{'end_date'};
 	
 	$answer = "{$evname} will Start on {$stdate} and will end on {$enddate}";
 	
-	if (strpos($answer, 'will start on  and will end on') !== false){ //if there is an error
-		$answer = "Error: Invalid event key! Type 'eventdate EVENTKEY'";
+	if (strpos($json_string, 'name') !== false){}else{ //if there is an error
+		$answer = "Error: Invalid event name!";
 	}
 	
 	$response = [
@@ -462,19 +466,24 @@ if(strpos(strtolower($messageText), 'eventdate') !== false) { //get an event dat
     'message' => [ 'text' => $answer ]
 ];
 }
-
 if(strpos(strtolower($messageText), 'ranking') !== false) { //get the ranking of an event
 	
 	$event = str_replace('rankings', '', strtolower($messageText)); // remove rankings to only keep the event key
 	$event = str_replace('ranking', '', strtolower($messageText)); // remove ranking to only keep the event key
 	$event = str_replace(' ', '', $event); // remove spaces
+	$evyear = filter_var($event, FILTER_SANITIZE_NUMBER_INT);
+	$event = str_replace($evyear, '', $event);
+	
+	$event = file_get_contents("https://frcbot.com/chatbot/scripts/eventbyname.php?eventname={$event}");
+	$event = "{$evyear}{$event}";
 	
 	$json_string = file_get_contents("https://www.thebluealliance.com/api/v2/event/{$event}?X-TBA-App-Id=frcbot:messengerchatbot:1");
-    	$parsed_json = json_decode($json_string);
+    $parsed_json = json_decode($json_string);
 	
 	$evname = $parsed_json->{'name'};
 	
 	$answer = "https://www.thebluealliance.com/event/{$event}#rankings";
+	$event = "{$evyear}{$event}";
 	
 	if(strpos(strtolower($json_string), 'name') !== false) {
 	$response = array (
@@ -505,7 +514,7 @@ if(strpos(strtolower($messageText), 'ranking') !== false) { //get the ranking of
 	  ),
 	);
 	}else{
-	$answer = "Error: Invalid event key!";
+	$answer = "Error: Invalid event name!";
 		$response = [
   		  'recipient' => [ 'id' => $senderId ],
   		  'message' => [ 'text' => $answer ]
