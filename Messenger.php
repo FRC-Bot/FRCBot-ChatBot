@@ -443,9 +443,11 @@ if(strpos(strtolower($messageText), 'eventdate') !== false) { //get an event dat
 	
 	$event = str_replace('eventdate', '', strtolower($messageText)); // remove eventdate to only keep the event key
 	$event = str_replace(' ', '', $event); // remove spaces
+	$evyear = filter_var($event, FILTER_SANITIZE_NUMBER_INT);
+	
 	
 	$json_string = file_get_contents("http://www.thebluealliance.com/api/v2/event/{$event}?X-TBA-App-Id=frcbot:messengerchatbot:1");
-    $parsed_json = json_decode($json_string);
+    	$parsed_json = json_decode($json_string);
 
 	$evname = $parsed_json->{'name'};
 	$stdate = $parsed_json->{'start_date'};
@@ -454,7 +456,7 @@ if(strpos(strtolower($messageText), 'eventdate') !== false) { //get an event dat
 	$answer = "{$evname} will Start on {$stdate} and will end on {$enddate}";
 	
 	if (strpos($answer, 'will start on  and will end on') !== false){ //if there is an error
-		$answer = "Error: Invalid event key! Type 'eventdate EVENTKEY'";
+		$answer = "Error: Invalid event key! Type 'eventdate EVENT NAME'";
 	}
 	
 	$response = [
