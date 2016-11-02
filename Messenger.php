@@ -473,7 +473,6 @@ if(strpos(strtolower($messageText), 'ranking') !== false) { //get the ranking of
 	$evname = $parsed_json->{'name'};
 	
 	$answer = "https://www.thebluealliance.com/event/{$event}#rankings";
-	$event = "{$evyear}{$event}";
 	
 	if(strpos(strtolower($json_string), 'name') !== false) {
 	$response = array (
