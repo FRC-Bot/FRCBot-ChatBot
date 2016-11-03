@@ -16,6 +16,9 @@ $isteamvalid = ""; // this variable will indicate if a team exist. I found out t
 $userinfojs = file_get_contents("https://graph.facebook.com/v2.6/{$senderId}?fields=first_name&access_token={$accessToken}");
 $userinfo = json_decode($userinfojs);
 $susername = $userinfo->{'first_name'};
+
+$currentyear = '2016';
+
 $answer = "I don't understand. Type 'help' for a list of commands!";
 	$response = [
     'recipient' => [ 'id' => $senderId ],
@@ -435,6 +438,11 @@ if(strpos(strtolower($messageText), 'date') !== false) { //get an event date
 	$event = str_replace(' ', '', $event); // remove spaces
 	$evyear = filter_var($event, FILTER_SANITIZE_NUMBER_INT);
 	$event = str_replace($evyear, '', $event);
+	if("{$evyear}" == ""){
+		
+		$evyear = $currentyear;
+		
+	}
 	
 	$event = file_get_contents("https://frcbot.com/chatbot/scripts/eventbyname.php?eventname={$event}");
 	$event = "{$evyear}{$event}";
@@ -463,6 +471,11 @@ if(strpos(strtolower($messageText), 'ranking') !== false) { //get the ranking of
 	$event = str_replace(' ', '', $event); // remove spaces
 	$evyear = filter_var($event, FILTER_SANITIZE_NUMBER_INT);
 	$event = str_replace($evyear, '', $event);
+	if("{$evyear}" == ""){
+		
+		$evyear = $currentyear;
+		
+	}
 	
 	$event = file_get_contents("https://frcbot.com/chatbot/scripts/eventbyname.php?eventname={$event}");
 	$event = "{$evyear}{$event}";
