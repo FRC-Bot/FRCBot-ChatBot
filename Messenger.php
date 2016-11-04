@@ -438,7 +438,7 @@ if(strpos(strtolower($messageText), 'date') !== false) { //get an event date
 	$event = str_replace(' ', '', $event); // remove spaces
 	$evyear = filter_var($event, FILTER_SANITIZE_NUMBER_INT);
 	$event = str_replace($evyear, '', $event);
-	if("{$evyear}" == ""){
+	if("{$evyear}{$event}" == "{$event}"){
 		
 		$evyear = $currentyear;
 		
@@ -471,7 +471,7 @@ if(strpos(strtolower($messageText), 'ranking') !== false) { //get the ranking of
 	$event = str_replace(' ', '', $event); // remove spaces
 	$evyear = filter_var($event, FILTER_SANITIZE_NUMBER_INT);
 	$event = str_replace($evyear, '', $event);
-	if("{$evyear}" == ""){
+	if("{$evyear}{$event}" == "{$event}"){
 		
 		$evyear = $currentyear;
 		
