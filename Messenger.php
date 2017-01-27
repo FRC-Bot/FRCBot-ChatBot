@@ -16,7 +16,7 @@ $userinfojs = file_get_contents("https://graph.facebook.com/v2.6/{$senderId}?fie
 $userinfo = json_decode($userinfojs);
 $susername = $userinfo->{'first_name'};
 
-$currentyear = '2016';
+$currentyear = '2017';
 
 $answer = "I don't understand. Type 'help' for a list of commands!";
 	$response = [
