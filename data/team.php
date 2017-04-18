@@ -5,6 +5,9 @@ $senderId = $_GET["uid"];
 $team = $_GET["team"];
 $year = $_GET["year"];
 
+//if team @ event
+$eventid = $_GET["evid"];
+
 if ($year = '') {
   $apistatus = file_get_contents("https://www.thebluealliance.com/api/v3/status");
   $year = $teamInfo->{"current_season"}; // Get the current year via the API
@@ -107,6 +110,30 @@ if (strpos($teamInfo->{"key"}, 'frc') !== false) { // Make sure the team exist b
 //      'message' => [ 'text' => $answer ]
 //  ];
 //  }
+  
+  
+  //team @ event
+  if ($command == "status") {
+    
+    $teamEventsjs = file_get_contents("https://www.thebluealliance.com/api/v3/team/frc{$team}/events/keys");
+    $teamEvents = json_decode($teamEventsjs);
+    
+    $teamLastEvent = end($teamEvents);
+    
+    $teamStatusjs = file_get_contents("https://www.thebluealliance.com/api/v3/team/frc{$team}/event/{$teamLastEvent}/status"); 
+    $teamStatus = json_decode($teamStatusjs);
+    
+    $teamstatus = $teamStatus->{'overall_status_str'};
+    $answer = $teamstatus;
+
+    $response = [
+      'recipient' => [ 'id' => $senderId ],
+      'message' => [ 'text' => $answer ]
+  ];
+  }
+  
+  
+  
 }else {
   $answer = "This team doesn't exist!";
 
