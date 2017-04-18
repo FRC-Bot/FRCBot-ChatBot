@@ -10,6 +10,7 @@ if ($_REQUEST['hub_verify_token'] === $hubVerifyToken) {
 $input = json_decode(file_get_contents('php://input'), true);
 $senderId = $input['entry'][0]['messaging'][0]['sender']['id'];
 $messageText = $input['entry'][0]['messaging'][0]['message']['text'];
+$optinMsg = $input['entry'][0]['messaging'][0]['optin']['ref'];
 $isteamvalid = ""; // this variable will indicate if a team exist. I found out that when you request the status of a team with the TBA nightbot http request, it tells you if the team exist or not.
 // These lines are getting the name of the user
 $userinfojs = file_get_contents("https://graph.facebook.com/v2.6/{$senderId}?fields=first_name&access_token={$accessToken}");
@@ -23,6 +24,15 @@ $answer = "I don't understand. Type 'help' for a list of commands!";
     'recipient' => [ 'id' => $senderId ],
     'message' => [ 'text' => $answer ]
 ];
+
+// If the user clicked on a "Send to messenger button"
+if (strpos($optinMsg, 'subscribe') !== false) {
+  //emulate a subscribe command
+  $optinsubteam = filter_var($optinMsg, FILTER_SANITIZE_NUMBER_INT);
+$messageText = "subscribe {$optinsubteam}";
+}
+
+
 //Random crap
 if(strpos(strtolower($messageText), 'shut up') !== false) {
 	$answer = "...";
@@ -589,6 +599,8 @@ $answer = "your id is: {$senderId}";
 ];
 
 }
+
+
 
 //this check if the team exist and write an error if it does not exist
 if (strpos(strtolower($isteamvalid), 'does not exist') !== false) {
